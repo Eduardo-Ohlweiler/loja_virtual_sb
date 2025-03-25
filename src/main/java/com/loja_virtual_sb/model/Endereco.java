@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import com.loja_virtual_sb.enums.TipoEndereco;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
