@@ -1,6 +1,6 @@
 package com.loja_virtual_sb.model;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;

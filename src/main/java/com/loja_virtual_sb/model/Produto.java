@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 @Table(name = "produto")
 @SequenceGenerator(name = "seq_produto", sequenceName = "seq_produto", allocationSize = 1, initialValue = 1)
 public class Produto implements Serializable {
+    
     private static final long serialVersionUID = 1L;
     
     @Id
