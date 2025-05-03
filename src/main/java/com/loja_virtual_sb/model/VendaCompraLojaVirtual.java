@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -69,6 +70,7 @@ public class VendaCompraLojaVirtual implements Serializable {
     private BigDecimal valorFrete;
     private Integer diaEntrega;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataVenda;
 

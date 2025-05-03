@@ -22,9 +22,13 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_produto")
     private Long id;
     
+    @Column(nullable = false)
     private String tipoUnidade;
 
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private Boolean ativo = Boolean.TRUE;
 
     @Column(columnDefinition = "text", length = 2000)
@@ -34,12 +38,16 @@ public class Produto implements Serializable {
     private Double largura;
     private Double altura;
     private Double profundidade;
-    private BigDecimal valorVenda;
-    private Integer QtdEstoque;
+
+    @Column(nullable = false)
+    private BigDecimal valorVenda = BigDecimal.ZERO;
+
+    @Column(nullable = false)
+    private Integer QtdEstoque = 0;
     private Integer QtdeAlertaEstoque;
     private String linkYoutube;
-    private Boolean alertaQtdeEstoque;
-    private Integer qtdeClique;
+    private Boolean alertaQtdeEstoque = Boolean.FALSE;
+    private Integer qtdeClique = 0;
 
     
 
