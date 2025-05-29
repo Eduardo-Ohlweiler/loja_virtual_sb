@@ -67,7 +67,6 @@ public class WebConfigSecurity {
         return new BCryptPasswordEncoder();
     }
 
-    // Cria o AuthenticationManager com seu UserDetailService e passwordEncoder
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authBuilder =
