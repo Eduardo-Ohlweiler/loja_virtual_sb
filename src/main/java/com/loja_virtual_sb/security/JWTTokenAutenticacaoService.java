@@ -27,7 +27,25 @@ public class JWTTokenAutenticacaoService {
 
         String token = TOKEN_PREFIX + " " + JWT;
         response.addHeader(HEADER_STRING, token);
+        liberacaoCors(response);
 
         response.getWriter().write("{\"Authorization\": \"" + token + "\"}");
     }
+
+    public void liberacaoCors(HttpServletResponse response){
+        if(response.getHeader("Access-Control_Allow-Origin") == null){
+            response.addHeader("Access-Control-Allow-Origin", "*");
+        }
+        if(response.getHeader("Access-Control_Allow-Headers") == null){
+            response.addHeader("Access-Control-Allow-Headers", "*");
+        }
+        if(response.getHeader("Access-Control_Request-Origin") == null){
+            response.addHeader("Access-Control-Request-Origin", "*");
+        }
+        if(response.getHeader("Access-Control_Allow-Methods") == null){
+            response.addHeader("Access-Control-Allow-Methods", "*");
+        }
+    }
 }
+
+
