@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Service
 public class JWTTokenAutenticacaoService {
     private static final long EXPIRATION_TIME = 959990000;
-    private static final String SECRET = "ss/-*-*sds565dsd-s/d-s*dsds";
+    private static final String SECRET = "super-secret-key-that-is-at-least-64-bytes-long-to-meet-requirements-1234567890";
 
     private static final String TOKEN_PREFIX = "Bearer";
     private static final String HEADER_STRING = "Authorization";
@@ -47,5 +47,3 @@ public class JWTTokenAutenticacaoService {
         }
     }
 }
-
-
