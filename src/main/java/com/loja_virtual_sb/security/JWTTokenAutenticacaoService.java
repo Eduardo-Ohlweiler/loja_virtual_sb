@@ -2,10 +2,19 @@ package com.loja_virtual_sb.security;
 
 import java.security.Key;
 import java.util.Date;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import com.loja_virtual_sb.ApplicationContextLoad;
+import com.loja_virtual_sb.model.Usuario;
+import com.loja_virtual_sb.repository.UsuarioRepository;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
@@ -30,6 +39,38 @@ public class JWTTokenAutenticacaoService {
         liberacaoCors(response);
 
         response.getWriter().write("{\"Authorization\": \"" + token + "\"}");
+    }
+
+    public Authentication getAuthentication(HttpServletRequest request, HttpServletResponse response) {
+
+        String token = request.getHeader(HEADER_STRING);
+        if(token != null) {
+            String tokenLimpo = token.replace(TOKEN_PREFIX, "").trim();
+
+            String user = Jwts.parserBuilder().
+                               setSigningKey(key).
+                               build().
+                               parseClaimsJws(tokenLimpo).
+                               getBody().
+                               getSubject();
+
+            if(user != null) {
+                Usuario usuario = ApplicationContextLoad.
+                                    getApplicationContext().
+                                    getBean(UsuarioRepository.class).
+                                    findUserByLogin(token);
+
+                if (usuario != null) {
+                    return new UsernamePasswordAuthenticationToken(usuario.getLogin(),
+                                                                   usuario.getSenha(),
+                                                                   usuario.getAuthorities());
+                }
+            }
+        }
+
+        liberacaoCors(response);
+
+        return null;
     }
 
     public void liberacaoCors(HttpServletResponse response){
